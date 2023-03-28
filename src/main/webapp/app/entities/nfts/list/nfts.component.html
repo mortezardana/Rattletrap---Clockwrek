@@ -1,0 +1,141 @@
+<div>
+  <h2 id="page-heading" data-cy="NftsHeading">
+    <span jhiTranslate="rattletrapApp.nfts.home.title">Nfts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="rattletrapApp.nfts.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-nfts"
+        [routerLink]="['/nfts/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rattletrapApp.nfts.home.createLabel"> Create a new Nfts </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="nfts?.length === 0">
+    <span jhiTranslate="rattletrapApp.nfts.home.notFound">No Nfts found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="nfts && nfts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.nfts.id">Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="creatorAddress">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.nfts.creatorAddress">Creator Address</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ownerAddress">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.nfts.ownerAddress">Owner Address</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="contractAddress">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.nfts.contractAddress">Contract Address</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fileAddress">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.nfts.fileAddress">File Address</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="actualFile">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.nfts.actualFile">Actual File</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="metadataAddress">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.nfts.metadataAddress">Metadata Address</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="metadata">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.nfts.metadata">Metadata</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="tile">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.nfts.tile">Tile</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="format">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.nfts.format">Format</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="traits">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.nfts.traits">Traits</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nfts of nfts; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/nfts', nfts.id, 'view']">{{ nfts.id }}</a>
+          </td>
+          <td>{{ nfts.creatorAddress }}</td>
+          <td>{{ nfts.ownerAddress }}</td>
+          <td>{{ nfts.contractAddress }}</td>
+          <td>{{ nfts.fileAddress }}</td>
+          <td>{{ nfts.actualFile }}</td>
+          <td>{{ nfts.metadataAddress }}</td>
+          <td>{{ nfts.metadata }}</td>
+          <td>{{ nfts.tile }}</td>
+          <td jhiTranslate="{{ 'rattletrapApp.Formats.' + nfts.format }}">{{ nfts.format }}</td>
+          <td>{{ nfts.traits }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/nfts', nfts.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/nfts', nfts.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(nfts)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

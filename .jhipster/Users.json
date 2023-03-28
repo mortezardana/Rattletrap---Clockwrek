@@ -1,0 +1,60 @@
+{
+  "applications": ["Rattletrap"],
+  "changelogDate": "20230328082041",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "users",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "userName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique", "minlength", "maxlength", "pattern"],
+      "fieldValidateRulesMaxlength": "64",
+      "fieldValidateRulesMinlength": "1",
+      "fieldValidateRulesPattern": "^[A-Z][a-z]+\\d$"
+    },
+    {
+      "fieldName": "wallets",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "galleries",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "UserType",
+      "fieldValues": "ARTIST,CURATOR,GALLERYOWNER,ADMIN"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Users",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "wallets",
+      "otherEntityRelationshipName": "userId",
+      "relationshipName": "id",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "galleries",
+      "otherEntityRelationshipName": "userId",
+      "relationshipName": "id",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

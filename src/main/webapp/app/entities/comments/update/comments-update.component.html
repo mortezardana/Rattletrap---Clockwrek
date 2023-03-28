@@ -1,0 +1,65 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-comments-heading" data-cy="CommentsCreateUpdateHeading" jhiTranslate="rattletrapApp.comments.home.createOrEditLabel">
+        Create or edit a Comments
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="rattletrapApp.comments.id" for="field_id">Id</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          <div *ngIf="editForm.get('id')!.invalid && (editForm.get('id')!.dirty || editForm.get('id')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('id')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('id')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="rattletrapApp.comments.text" for="field_text">Text</label>
+          <input type="text" class="form-control" name="text" id="field_text" data-cy="text" formControlName="text" />
+          <div *ngIf="editForm.get('text')!.invalid && (editForm.get('text')!.dirty || editForm.get('text')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('text')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="rattletrapApp.comments.father" for="field_father">Father</label>
+          <input type="number" class="form-control" name="father" id="field_father" data-cy="father" formControlName="father" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="rattletrapApp.comments.id" for="field_id">Id</label>
+          <select class="form-control" id="field_id" data-cy="id" name="id" formControlName="id" [compareWith]="compareGalleries">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="galleriesOption" *ngFor="let galleriesOption of galleriesSharedCollection">{{ galleriesOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Galleries.
+    -->
+    <changeSet id="20230328082042-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="galleries_id"
+                                 baseTableName="rel_galleries__nfts"
+                                 constraintName="fk_rel_galleries__nfts__galleries_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="galleries"/>
+
+        <addForeignKeyConstraint baseColumnNames="nfts_id"
+                                 baseTableName="rel_galleries__nfts"
+                                 constraintName="fk_rel_galleries__nfts__nfts_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="nfts"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id_id"
+                                 baseTableName="galleries"
+                                 constraintName="fk_galleries__user_id_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+</databaseChangeLog>

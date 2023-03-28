@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="nfts">
+      <h2 data-cy="nftsDetailsHeading"><span jhiTranslate="rattletrapApp.nfts.detail.title">Nfts</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="rattletrapApp.nfts.id">Id</span></dt>
+        <dd>
+          <span>{{ nfts.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="rattletrapApp.nfts.creatorAddress">Creator Address</span></dt>
+        <dd>
+          <span>{{ nfts.creatorAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="rattletrapApp.nfts.ownerAddress">Owner Address</span></dt>
+        <dd>
+          <span>{{ nfts.ownerAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="rattletrapApp.nfts.contractAddress">Contract Address</span></dt>
+        <dd>
+          <span>{{ nfts.contractAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="rattletrapApp.nfts.fileAddress">File Address</span></dt>
+        <dd>
+          <span>{{ nfts.fileAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="rattletrapApp.nfts.actualFile">Actual File</span></dt>
+        <dd>
+          <span>{{ nfts.actualFile }}</span>
+        </dd>
+        <dt><span jhiTranslate="rattletrapApp.nfts.metadataAddress">Metadata Address</span></dt>
+        <dd>
+          <span>{{ nfts.metadataAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="rattletrapApp.nfts.metadata">Metadata</span></dt>
+        <dd>
+          <span>{{ nfts.metadata }}</span>
+        </dd>
+        <dt><span jhiTranslate="rattletrapApp.nfts.tile">Tile</span></dt>
+        <dd>
+          <span>{{ nfts.tile }}</span>
+        </dd>
+        <dt><span jhiTranslate="rattletrapApp.nfts.format">Format</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'rattletrapApp.Formats.' + nfts.format }}">{{ nfts.format }}</span>
+        </dd>
+        <dt><span jhiTranslate="rattletrapApp.nfts.traits">Traits</span></dt>
+        <dd>
+          <span>{{ nfts.traits }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/nfts', nfts.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

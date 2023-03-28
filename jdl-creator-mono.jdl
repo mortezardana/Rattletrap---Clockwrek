@@ -15,8 +15,8 @@ application {
     serverPort 9000
   }
   entities *
-  // dto * with mapstruct
-  // service * with serviceClass
+   dto * with mapstruct
+   service * with serviceClass
 }
 
 entity Wallets {

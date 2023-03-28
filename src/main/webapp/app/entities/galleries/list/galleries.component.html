@@ -1,0 +1,132 @@
+<div>
+  <h2 id="page-heading" data-cy="GalleriesHeading">
+    <span jhiTranslate="rattletrapApp.galleries.home.title">Galleries</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="rattletrapApp.galleries.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-galleries"
+        [routerLink]="['/galleries/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="rattletrapApp.galleries.home.createLabel"> Create a new Galleries </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="galleries?.length === 0">
+    <span jhiTranslate="rattletrapApp.galleries.home.notFound">No Galleries found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="galleries && galleries.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.galleries.id">Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="creator">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.galleries.creator">Creator</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nfts">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.galleries.nfts">Nfts</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="likes">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.galleries.likes">Likes</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="comments">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.galleries.comments">Comments</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nfts.id">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.galleries.nfts">Nfts</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="userId.id">
+            <div class="d-flex">
+              <span jhiTranslate="rattletrapApp.galleries.userId">User Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let galleries of galleries; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/galleries', galleries.id, 'view']">{{ galleries.id }}</a>
+          </td>
+          <td>{{ galleries.creator }}</td>
+          <td>{{ galleries.nfts }}</td>
+          <td>{{ galleries.likes }}</td>
+          <td>{{ galleries.comments }}</td>
+          <td>
+            <span *ngFor="let nfts of galleries.nfts; let last = last">
+              <a class="form-control-static" [routerLink]="['/nfts', nfts.id, 'view']">{{ nfts.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <div *ngIf="galleries.userId">
+              <a [routerLink]="['/users', galleries.userId.id, 'view']">{{ galleries.userId.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/galleries', galleries.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/galleries', galleries.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(galleries)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

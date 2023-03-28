@@ -1,0 +1,11 @@
+{
+  "rattletrapApp": {
+    "Formats": {
+      "null": "",
+      "JPG": "JPG",
+      "PNG": "PNG",
+      "MP4": "MP4",
+      "GIF": "GIF"
+    }
+  }
+}

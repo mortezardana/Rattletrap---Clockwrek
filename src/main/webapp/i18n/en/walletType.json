@@ -1,0 +1,10 @@
+{
+  "rattletrapApp": {
+    "WalletType": {
+      "null": "",
+      "ETHEREUM": "ETHEREUM",
+      "BITCOINchrome": "BITCOINchrome",
+      "TEZOS": "TEZOS"
+    }
+  }
+}

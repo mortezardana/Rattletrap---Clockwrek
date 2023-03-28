@@ -1,0 +1,30 @@
+{
+  "rattletrapApp": {
+    "galleries": {
+      "home": {
+        "title": "Galleries",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Galleries",
+        "createOrEditLabel": "Create or edit a Galleries",
+        "notFound": "No Galleries found"
+      },
+      "created": "A new Galleries is created with identifier {{ param }}",
+      "updated": "A Galleries is updated with identifier {{ param }}",
+      "deleted": "A Galleries is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Galleries {{ id }}?"
+      },
+      "detail": {
+        "title": "Galleries"
+      },
+      "id": "Id",
+      "creator": "Creator",
+      "nfts": "Nfts",
+      "likes": "Likes",
+      "comments": "Comments",
+      "comments": "Comments",
+      "nfts": "Nfts",
+      "userId": "User Id"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "applications": ["Rattletrap"],
+  "changelogDate": "20230328082044",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "nfts",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "creatorAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ownerAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contractAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fileAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "actualFile",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "metadataAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "metadata",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tile",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "format",
+      "fieldType": "Formats",
+      "fieldValues": "JPG,PNG,MP4,GIF"
+    },
+    {
+      "fieldName": "traits",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Nfts",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "galleries",
+      "otherEntityRelationshipName": "nfts",
+      "ownerSide": false,
+      "relationshipName": "id",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

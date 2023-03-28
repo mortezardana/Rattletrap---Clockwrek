@@ -1,0 +1,11 @@
+{
+  "rattletrapApp": {
+    "UserType": {
+      "null": "",
+      "ARTIST": "ARTIST",
+      "CURATOR": "CURATOR",
+      "GALLERYOWNER": "GALLERYOWNER",
+      "ADMIN": "ADMIN"
+    }
+  }
+}

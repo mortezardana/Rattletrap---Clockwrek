@@ -1,0 +1,33 @@
+{
+  "applications": ["Rattletrap"],
+  "changelogDate": "20230328082045",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "events",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "enDate",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Events",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

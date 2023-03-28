@@ -1,0 +1,37 @@
+{
+  "applications": ["Rattletrap"],
+  "changelogDate": "20230328082043",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "comments",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "text",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "father",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Comments",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "galleries",
+      "otherEntityRelationshipName": "comments",
+      "relationshipName": "id",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

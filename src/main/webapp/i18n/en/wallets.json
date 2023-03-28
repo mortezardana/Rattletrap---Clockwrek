@@ -1,0 +1,27 @@
+{
+  "rattletrapApp": {
+    "wallets": {
+      "home": {
+        "title": "Wallets",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Wallets",
+        "createOrEditLabel": "Create or edit a Wallets",
+        "notFound": "No Wallets found"
+      },
+      "created": "A new Wallets is created with identifier {{ param }}",
+      "updated": "A Wallets is updated with identifier {{ param }}",
+      "deleted": "A Wallets is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Wallets {{ id }}?"
+      },
+      "detail": {
+        "title": "Wallets"
+      },
+      "id": "Id",
+      "userId": "User Id",
+      "walletAddress": "Wallet Address",
+      "walletType": "Wallet Type",
+      "userId": "User Id"
+    }
+  }
+}

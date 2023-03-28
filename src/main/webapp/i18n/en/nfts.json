@@ -1,0 +1,34 @@
+{
+  "rattletrapApp": {
+    "nfts": {
+      "home": {
+        "title": "Nfts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Nfts",
+        "createOrEditLabel": "Create or edit a Nfts",
+        "notFound": "No Nfts found"
+      },
+      "created": "A new Nfts is created with identifier {{ param }}",
+      "updated": "A Nfts is updated with identifier {{ param }}",
+      "deleted": "A Nfts is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Nfts {{ id }}?"
+      },
+      "detail": {
+        "title": "Nfts"
+      },
+      "id": "Id",
+      "creatorAddress": "Creator Address",
+      "ownerAddress": "Owner Address",
+      "contractAddress": "Contract Address",
+      "fileAddress": "File Address",
+      "actualFile": "Actual File",
+      "metadataAddress": "Metadata Address",
+      "metadata": "Metadata",
+      "tile": "Tile",
+      "format": "Format",
+      "traits": "Traits",
+      "id": "Id"
+    }
+  }
+}

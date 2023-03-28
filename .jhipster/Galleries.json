@@ -1,0 +1,58 @@
+{
+  "applications": ["Rattletrap"],
+  "changelogDate": "20230328082042",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "galleries",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "creator",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "nfts",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "likes",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "comments",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Galleries",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "comments",
+      "otherEntityRelationshipName": "id",
+      "relationshipName": "comments",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "nfts",
+      "otherEntityRelationshipName": "id",
+      "ownerSide": true,
+      "relationshipName": "nfts",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "users",
+      "otherEntityRelationshipName": "id",
+      "relationshipName": "userId",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

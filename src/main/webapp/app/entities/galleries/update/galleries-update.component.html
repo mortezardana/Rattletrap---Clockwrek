@@ -1,0 +1,108 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-galleries-heading" data-cy="GalleriesCreateUpdateHeading" jhiTranslate="rattletrapApp.galleries.home.createOrEditLabel">
+        Create or edit a Galleries
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="rattletrapApp.galleries.id" for="field_id">Id</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          <div *ngIf="editForm.get('id')!.invalid && (editForm.get('id')!.dirty || editForm.get('id')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('id')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('id')?.errors?.number" jhiTranslate="entity.validation.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="rattletrapApp.galleries.creator" for="field_creator">Creator</label>
+          <input type="number" class="form-control" name="creator" id="field_creator" data-cy="creator" formControlName="creator" />
+          <div *ngIf="editForm.get('creator')!.invalid && (editForm.get('creator')!.dirty || editForm.get('creator')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('creator')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+            <small
+              class="form-text text-danger"
+              [hidden]="!editForm.get('creator')?.errors?.number"
+              jhiTranslate="entity.validation.number"
+            >
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="rattletrapApp.galleries.nfts" for="field_nfts">Nfts</label>
+          <input type="text" class="form-control" name="nfts" id="field_nfts" data-cy="nfts" formControlName="nfts" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="rattletrapApp.galleries.likes" for="field_likes">Likes</label>
+          <input type="text" class="form-control" name="likes" id="field_likes" data-cy="likes" formControlName="likes" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="rattletrapApp.galleries.comments" for="field_comments">Comments</label>
+          <input type="text" class="form-control" name="comments" id="field_comments" data-cy="comments" formControlName="comments" />
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="rattletrapApp.galleries.nfts" for="field_nfts">Nfts</label>
+          <select
+            class="form-control"
+            id="field_nfts"
+            data-cy="nfts"
+            multiple
+            name="nfts"
+            formControlName="nfts"
+            [compareWith]="compareNfts"
+          >
+            <option [ngValue]="nftsOption" *ngFor="let nftsOption of nftsSharedCollection">{{ nftsOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="rattletrapApp.galleries.userId" for="field_userId">User Id</label>
+          <select
+            class="form-control"
+            id="field_userId"
+            data-cy="userId"
+            name="userId"
+            formControlName="userId"
+            [compareWith]="compareUsers"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="usersOption" *ngFor="let usersOption of usersSharedCollection">{{ usersOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

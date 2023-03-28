@@ -1,0 +1,42 @@
+{
+  "applications": ["Rattletrap"],
+  "changelogDate": "20230328082040",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "wallets",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "userId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "walletAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "walletType",
+      "fieldType": "WalletType",
+      "fieldValues": "ETHEREUM,BITCOINchrome,TEZOS"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Wallets",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "users",
+      "otherEntityRelationshipName": "id",
+      "relationshipName": "userId",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}
