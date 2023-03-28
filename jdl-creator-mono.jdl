@@ -1,0 +1,101 @@
+// TODO: get some advice on microserevices architecture and database design and redesign or adjust each microservice as fit
+// this is the gateway microservice that should handle mobile and web app APIs and should be responsible for handling every global communication and API access and pass info to the correct microservice with traslated and mapped object and remove encryption and authentication complexities
+
+// main back-end component, main logic as they say
+application {
+  config {
+    baseName Rattletrap
+    applicationType monolith
+    packageName com.yellowmorty.steamball
+    authenticationType jwt
+    prodDatabaseType mysql
+    clientFramework angularX
+    buildTool maven
+    clientPackageManager npm
+    serverPort 9000
+  }
+  entities *
+  // dto * with mapstruct
+  // service * with serviceClass
+}
+
+entity Wallets {
+	id Long required unique
+    userId Long required unique
+	walletAddress String
+    walletType WalletType
+}
+entity Users {
+	id Long required unique
+    userName String required unique minlength(1) maxlength(64) pattern(/^[A-Z][a-z]+\d$/)
+    Wallets String
+    galleries String
+    password String required
+    type UserType
+}
+entity Galleries {
+	id Long required unique
+    creator Long required unique
+    nfts String
+    likes String
+    comments String
+    //reations unknown
+}
+
+entity Comments {
+	id Long required unique
+    text String required
+    father Long
+}
+
+entity Nfts {
+	id Long required unique
+    // R&D about NFTs whether have only one owner or multiple and adjust these two variables relations down below
+    creatorAddress String
+    ownerAddress String
+    contractAddress String
+    fileAddress String
+    actualFile String
+    metadataAddress String
+    metadata String
+    tile String
+    format Formats
+    // traits can be a mongodb or something database to store all the metadata and every little thing we can store as for NFT data including smart contract metadata addresses etc.
+    traits String
+}
+entity Events {
+    id Long required unique
+    name String
+    // TODO: should add right type for timedate below
+    startDate String
+    enDate String
+}
+enum UserType {
+	ARTIST
+    CURATOR
+    GALLERYOWNER
+    ADMIN
+}
+
+enum WalletType {
+	ETHEREUM
+    BITCOINchrome
+    TEZOS
+}
+enum Formats {
+    JPG
+    PNG
+    MP4
+    GIF
+}
+relationship OneToMany {
+  Users{id} to Wallets{userId}
+  Users{id} to Galleries{userId}
+  Galleries{comments} to Comments{id}
+}
+//relationship ManyToOne {
+//  Comments{id} to Comments{father}
+//}
+relationship ManyToMany {
+  Galleries{nfts} to Nfts{id}
+}
