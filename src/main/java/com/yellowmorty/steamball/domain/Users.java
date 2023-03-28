@@ -33,12 +33,6 @@ public class Users implements Serializable {
     @Column(name = "user_name", length = 64, nullable = false, unique = true)
     private String userName;
 
-    @Column(name = "wallets")
-    private String wallets;
-
-    @Column(name = "galleries")
-    private String galleries;
-
     @NotNull
     @Column(name = "password", nullable = false)
     private String password;
@@ -48,18 +42,14 @@ public class Users implements Serializable {
     private UserType type;
 
     @OneToMany(mappedBy = "userId")
-    @OneToMany(mappedBy = "userId")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "userId" }, allowSetters = true)
-    private Set<Wallets> ids = new HashSet<>();
+    private Set<Wallets> wallets = new HashSet<>();
 
     @OneToMany(mappedBy = "userId")
-    @OneToMany(mappedBy = "userId")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "comments", "nfts", "userId" }, allowSetters = true)
-    private Set<Galleries> ids = new HashSet<>();
+    private Set<Galleries> galleries = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -89,32 +79,6 @@ public class Users implements Serializable {
         this.userName = userName;
     }
 
-    public String getWallets() {
-        return this.wallets;
-    }
-
-    public Users wallets(String wallets) {
-        this.setWallets(wallets);
-        return this;
-    }
-
-    public void setWallets(String wallets) {
-        this.wallets = wallets;
-    }
-
-    public String getGalleries() {
-        return this.galleries;
-    }
-
-    public Users galleries(String galleries) {
-        this.setGalleries(galleries);
-        return this;
-    }
-
-    public void setGalleries(String galleries) {
-        this.galleries = galleries;
-    }
-
     public String getPassword() {
         return this.password;
     }
@@ -141,64 +105,63 @@ public class Users implements Serializable {
         this.type = type;
     }
 
-    public Set<Wallets> getIds() {
-        return this.ids;
+    public Set<Wallets> getWallets() {
+        return this.wallets;
     }
 
-    public void setIds(Set<Wallets> wallets) {
-        if (this.ids != null) {
-            this.ids.forEach(i -> i.setUserId(null));
+    public void setWallets(Set<Wallets> wallets) {
+        if (this.wallets != null) {
+            //            this.wallets.forEach(i -> i.setUserId(null));
         }
         if (wallets != null) {
             wallets.forEach(i -> i.setUserId(this));
         }
-        this.ids = wallets;
+        this.wallets = wallets;
     }
 
-    public Users ids(Set<Wallets> wallets) {
-        this.setIds(wallets);
+    public Users wallets(Set<Wallets> wallets) {
+        this.setWallets(wallets);
         return this;
     }
 
-    public Users addId(Wallets wallets) {
-        this.ids.add(wallets);
+    public Users galleries(Set<Galleries> galleries) {
+        this.setGalleries(galleries);
+        return this;
+    }
+
+    public Users addWallet(Wallets wallets) {
+        this.wallets.add(wallets);
         wallets.setUserId(this);
         return this;
     }
 
-    public Users removeId(Wallets wallets) {
-        this.ids.remove(wallets);
-        wallets.setUserId(null);
+    public Users removeWallet(Wallets wallets) {
+        this.wallets.remove(wallets);
         return this;
     }
 
-    public Set<Galleries> getIds() {
-        return this.ids;
+    public Set<Galleries> getGalleries() {
+        return this.galleries;
     }
 
-    public void setIds(Set<Galleries> galleries) {
-        if (this.ids != null) {
-            this.ids.forEach(i -> i.setUserId(null));
+    public void setGalleries(Set<Galleries> galleries) {
+        if (this.galleries != null) {
+            //            this.galleries.forEach(i -> i.setUserId(null));
         }
         if (galleries != null) {
             galleries.forEach(i -> i.setUserId(this));
         }
-        this.ids = galleries;
+        this.galleries = galleries;
     }
 
-    public Users ids(Set<Galleries> galleries) {
-        this.setIds(galleries);
-        return this;
-    }
-
-    public Users addId(Galleries galleries) {
-        this.ids.add(galleries);
+    public Users addGallery(Galleries galleries) {
+        this.galleries.add(galleries);
         galleries.setUserId(this);
         return this;
     }
 
-    public Users removeId(Galleries galleries) {
-        this.ids.remove(galleries);
+    public Users removeGallery(Galleries galleries) {
+        this.galleries.remove(galleries);
         galleries.setUserId(null);
         return this;
     }

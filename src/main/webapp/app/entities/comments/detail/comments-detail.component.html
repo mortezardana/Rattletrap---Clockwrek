@@ -25,7 +25,7 @@
         <dt><span jhiTranslate="rattletrapApp.comments.id">Id</span></dt>
         <dd>
           <div *ngIf="comments.id">
-            <a [routerLink]="['/galleries', comments.id.id, 'view']">{{ comments.id.id }}</a>
+            <a [routerLink]="['/galleries', comments.galleryId, 'view']">{{ comments.galleryId }}</a>
           </div>
         </dd>
       </dl>

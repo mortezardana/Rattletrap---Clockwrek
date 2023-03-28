@@ -51,12 +51,12 @@ describe('Comments Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Galleries query and add missing value', () => {
       const comments: IComments = { id: 456 };
-      const id: IGalleries = { id: 73392 };
-      comments.id = id;
+      const galleryId: IGalleries = { id: 73392 };
+      comments.galleryId = galleryId;
 
       const galleriesCollection: IGalleries[] = [{ id: 90911 }];
       jest.spyOn(galleriesService, 'query').mockReturnValue(of(new HttpResponse({ body: galleriesCollection })));
-      const additionalGalleries = [id];
+      const additionalGalleries = [galleryId];
       const expectedCollection: IGalleries[] = [...additionalGalleries, ...galleriesCollection];
       jest.spyOn(galleriesService, 'addGalleriesToCollectionIfMissing').mockReturnValue(expectedCollection);
 
@@ -73,13 +73,13 @@ describe('Comments Management Update Component', () => {
 
     it('Should update editForm', () => {
       const comments: IComments = { id: 456 };
-      const id: IGalleries = { id: 7622 };
-      comments.id = id;
+      const galleryId: IGalleries = { id: 7622 };
+      comments.galleryId = galleryId;
 
       activatedRoute.data = of({ comments });
       comp.ngOnInit();
 
-      expect(comp.galleriesSharedCollection).toContain(id);
+      expect(comp.galleriesSharedCollection).toContain(galleryId);
       expect(comp.comments).toEqual(comments);
     });
   });

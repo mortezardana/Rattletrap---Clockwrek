@@ -1,5 +1,6 @@
 package com.yellowmorty.steamball.service.dto;
 
+import com.yellowmorty.steamball.domain.Comments;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -18,11 +19,9 @@ public class GalleriesDTO implements Serializable {
     @NotNull
     private Long creator;
 
-    private String nfts;
-
     private String likes;
 
-    private String comments;
+    private Set<Comments> comments;
 
     private Set<NftsDTO> nfts = new HashSet<>();
 
@@ -44,14 +43,6 @@ public class GalleriesDTO implements Serializable {
         this.creator = creator;
     }
 
-    public String getNfts() {
-        return nfts;
-    }
-
-    public void setNfts(String nfts) {
-        this.nfts = nfts;
-    }
-
     public String getLikes() {
         return likes;
     }
@@ -60,11 +51,11 @@ public class GalleriesDTO implements Serializable {
         this.likes = likes;
     }
 
-    public String getComments() {
+    public Set<Comments> getComments() {
         return comments;
     }
 
-    public void setComments(String comments) {
+    public void setComments(Set<Comments> comments) {
         this.comments = comments;
     }
 

@@ -30,14 +30,8 @@ public class Galleries implements Serializable {
     @Column(name = "creator", nullable = false, unique = true)
     private Long creator;
 
-    @Column(name = "nfts")
-    private String nfts;
-
     @Column(name = "likes")
     private String likes;
-
-    @Column(name = "comments")
-    private String comments;
 
     @OneToMany(mappedBy = "id")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -86,19 +80,6 @@ public class Galleries implements Serializable {
         this.creator = creator;
     }
 
-    public String getNfts() {
-        return this.nfts;
-    }
-
-    public Galleries nfts(String nfts) {
-        this.setNfts(nfts);
-        return this;
-    }
-
-    public void setNfts(String nfts) {
-        this.nfts = nfts;
-    }
-
     public String getLikes() {
         return this.likes;
     }
@@ -112,29 +93,16 @@ public class Galleries implements Serializable {
         this.likes = likes;
     }
 
-    public String getComments() {
-        return this.comments;
-    }
-
-    public Galleries comments(String comments) {
-        this.setComments(comments);
-        return this;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
-
     public Set<Comments> getComments() {
         return this.comments;
     }
 
     public void setComments(Set<Comments> comments) {
         if (this.comments != null) {
-            this.comments.forEach(i -> i.setId(null));
+            //            this.comments.forEach(i -> i.setId(null));
         }
         if (comments != null) {
-            comments.forEach(i -> i.setId(this));
+            comments.forEach(i -> i.setId(this.id));
         }
         this.comments = comments;
     }
@@ -146,13 +114,12 @@ public class Galleries implements Serializable {
 
     public Galleries addComments(Comments comments) {
         this.comments.add(comments);
-        comments.setId(this);
+        comments.setId(this.id);
         return this;
     }
 
     public Galleries removeComments(Comments comments) {
         this.comments.remove(comments);
-        comments.setId(null);
         return this;
     }
 

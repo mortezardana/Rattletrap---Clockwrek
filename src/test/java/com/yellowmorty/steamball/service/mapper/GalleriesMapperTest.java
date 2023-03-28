@@ -6,11 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class GalleriesMapperTest {
-
-    private GalleriesMapper galleriesMapper;
-
-    @BeforeEach
-    public void setUp() {
-        galleriesMapper = new GalleriesMapperImpl();
-    }
+    //    private GalleriesMapper galleriesMapper;
+    //
+    //    @BeforeEach
+    //    public void setUp() {
+    //        galleriesMapper = new GalleriesMapperImpl();
+    //    }
 }

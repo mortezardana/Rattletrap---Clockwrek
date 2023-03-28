@@ -3,7 +3,6 @@ package com.yellowmorty.steamball.service;
 import com.yellowmorty.steamball.domain.Galleries;
 import com.yellowmorty.steamball.repository.GalleriesRepository;
 import com.yellowmorty.steamball.service.dto.GalleriesDTO;
-import com.yellowmorty.steamball.service.mapper.GalleriesMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -26,11 +25,10 @@ public class GalleriesService {
 
     private final GalleriesRepository galleriesRepository;
 
-    private final GalleriesMapper galleriesMapper;
+    //    private final GalleriesMapper galleriesMapper;
 
-    public GalleriesService(GalleriesRepository galleriesRepository, GalleriesMapper galleriesMapper) {
+    public GalleriesService(GalleriesRepository galleriesRepository) {
         this.galleriesRepository = galleriesRepository;
-        this.galleriesMapper = galleriesMapper;
     }
 
     /**
@@ -41,9 +39,10 @@ public class GalleriesService {
      */
     public GalleriesDTO save(GalleriesDTO galleriesDTO) {
         log.debug("Request to save Galleries : {}", galleriesDTO);
-        Galleries galleries = galleriesMapper.toEntity(galleriesDTO);
-        galleries = galleriesRepository.save(galleries);
-        return galleriesMapper.toDto(galleries);
+        //        Galleries galleries = galleriesMapper.toEntity(galleriesDTO);
+        //        galleries = galleriesRepository.save(galleries);
+        //        return galleriesMapper.toDto(galleries);
+        return galleriesDTO;
     }
 
     /**
@@ -54,9 +53,10 @@ public class GalleriesService {
      */
     public GalleriesDTO update(GalleriesDTO galleriesDTO) {
         log.debug("Request to update Galleries : {}", galleriesDTO);
-        Galleries galleries = galleriesMapper.toEntity(galleriesDTO);
-        galleries = galleriesRepository.save(galleries);
-        return galleriesMapper.toDto(galleries);
+        //        Galleries galleries = galleriesMapper.toEntity(galleriesDTO);
+        //        galleries = galleriesRepository.save(galleries);
+        //        return galleriesMapper.toDto(galleries);
+        return galleriesDTO;
     }
 
     /**
@@ -65,39 +65,39 @@ public class GalleriesService {
      * @param galleriesDTO the entity to update partially.
      * @return the persisted entity.
      */
-    public Optional<GalleriesDTO> partialUpdate(GalleriesDTO galleriesDTO) {
-        log.debug("Request to partially update Galleries : {}", galleriesDTO);
-
-        return galleriesRepository
-            .findById(galleriesDTO.getId())
-            .map(existingGalleries -> {
-                galleriesMapper.partialUpdate(existingGalleries, galleriesDTO);
-
-                return existingGalleries;
-            })
-            .map(galleriesRepository::save)
-            .map(galleriesMapper::toDto);
-    }
+    //    public Optional<GalleriesDTO> partialUpdate(GalleriesDTO galleriesDTO) {
+    //        log.debug("Request to partially update Galleries : {}", galleriesDTO);
+    //
+    //        return galleriesRepository
+    //            .findById(galleriesDTO.getId())
+    //            .map(existingGalleries -> {
+    //                galleriesMapper.partialUpdate(existingGalleries, galleriesDTO);
+    //
+    //                return existingGalleries;
+    //            })
+    //            .map(galleriesRepository::save)
+    //            .map(galleriesMapper::toDto);
+    //    }
 
     /**
      * Get all the galleries.
      *
      * @return the list of entities.
      */
-    @Transactional(readOnly = true)
-    public List<GalleriesDTO> findAll() {
-        log.debug("Request to get all Galleries");
-        return galleriesRepository.findAll().stream().map(galleriesMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
-    }
+    //    @Transactional(readOnly = true)
+    //    public List<GalleriesDTO> findAll() {
+    //        log.debug("Request to get all Galleries");
+    //        return galleriesRepository.findAll().stream().map(galleriesMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    //    }
 
     /**
      * Get all the galleries with eager load of many-to-many relationships.
      *
      * @return the list of entities.
      */
-    public Page<GalleriesDTO> findAllWithEagerRelationships(Pageable pageable) {
-        return galleriesRepository.findAllWithEagerRelationships(pageable).map(galleriesMapper::toDto);
-    }
+    //    public Page<GalleriesDTO> findAllWithEagerRelationships(Pageable pageable) {
+    //        return galleriesRepository.findAllWithEagerRelationships(pageable).map(galleriesMapper::toDto);
+    //    }
 
     /**
      * Get one galleries by id.
@@ -105,11 +105,11 @@ public class GalleriesService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    @Transactional(readOnly = true)
-    public Optional<GalleriesDTO> findOne(Long id) {
-        log.debug("Request to get Galleries : {}", id);
-        return galleriesRepository.findOneWithEagerRelationships(id).map(galleriesMapper::toDto);
-    }
+    //    @Transactional(readOnly = true)
+    //    public Optional<GalleriesDTO> findOne(Long id) {
+    //        log.debug("Request to get Galleries : {}", id);
+    //        return galleriesRepository.findOneWithEagerRelationships(id).map(galleriesMapper::toDto);
+    //    }
 
     /**
      * Delete the galleries by id.

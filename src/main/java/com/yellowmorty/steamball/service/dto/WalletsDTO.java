@@ -14,9 +14,6 @@ public class WalletsDTO implements Serializable {
     @NotNull
     private Long id;
 
-    @NotNull
-    private Long userId;
-
     private String walletAddress;
 
     private WalletType walletType;
@@ -29,14 +26,6 @@ public class WalletsDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getWalletAddress() {

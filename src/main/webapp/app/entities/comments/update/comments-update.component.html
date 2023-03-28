@@ -37,8 +37,15 @@
         </div>
 
         <div class="row mb-3">
-          <label class="form-label" jhiTranslate="rattletrapApp.comments.id" for="field_id">Id</label>
-          <select class="form-control" id="field_id" data-cy="id" name="id" formControlName="id" [compareWith]="compareGalleries">
+          <label class="form-label" jhiTranslate="rattletrapApp.comments.galleryId" for="field_galleryId">Id</label>
+          <select
+            class="form-control"
+            id="field_galleryId"
+            data-cy="galleryId"
+            name="galleryId"
+            formControlName="galleryId"
+            [compareWith]="compareGalleries"
+          >
             <option [ngValue]="null"></option>
             <option [ngValue]="galleriesOption" *ngFor="let galleriesOption of galleriesSharedCollection">{{ galleriesOption.id }}</option>
           </select>

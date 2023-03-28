@@ -3,7 +3,6 @@ package com.yellowmorty.steamball.service;
 import com.yellowmorty.steamball.domain.Comments;
 import com.yellowmorty.steamball.repository.CommentsRepository;
 import com.yellowmorty.steamball.service.dto.CommentsDTO;
-import com.yellowmorty.steamball.service.mapper.CommentsMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -24,11 +23,10 @@ public class CommentsService {
 
     private final CommentsRepository commentsRepository;
 
-    private final CommentsMapper commentsMapper;
+    //    private final CommentsMapper commentsMapper;
 
-    public CommentsService(CommentsRepository commentsRepository, CommentsMapper commentsMapper) {
+    public CommentsService(CommentsRepository commentsRepository) {
         this.commentsRepository = commentsRepository;
-        this.commentsMapper = commentsMapper;
     }
 
     /**
@@ -39,9 +37,10 @@ public class CommentsService {
      */
     public CommentsDTO save(CommentsDTO commentsDTO) {
         log.debug("Request to save Comments : {}", commentsDTO);
-        Comments comments = commentsMapper.toEntity(commentsDTO);
-        comments = commentsRepository.save(comments);
-        return commentsMapper.toDto(comments);
+        //        Comments comments = commentsMapper.toEntity(commentsDTO);
+        //        comments = commentsRepository.save(comments);
+        //        return commentsMapper.toDto(comments);
+        return commentsDTO;
     }
 
     /**
@@ -52,9 +51,10 @@ public class CommentsService {
      */
     public CommentsDTO update(CommentsDTO commentsDTO) {
         log.debug("Request to update Comments : {}", commentsDTO);
-        Comments comments = commentsMapper.toEntity(commentsDTO);
-        comments = commentsRepository.save(comments);
-        return commentsMapper.toDto(comments);
+        //        Comments comments = commentsMapper.toEntity(commentsDTO);
+        //        comments = commentsRepository.save(comments);
+        //        return commentsMapper.toDto(comments);
+        return commentsDTO;
     }
 
     /**
@@ -63,30 +63,30 @@ public class CommentsService {
      * @param commentsDTO the entity to update partially.
      * @return the persisted entity.
      */
-    public Optional<CommentsDTO> partialUpdate(CommentsDTO commentsDTO) {
-        log.debug("Request to partially update Comments : {}", commentsDTO);
+    //    public Optional<CommentsDTO> partialUpdate(CommentsDTO commentsDTO) {
+    //        log.debug("Request to partially update Comments : {}", commentsDTO);
 
-        return commentsRepository
-            .findById(commentsDTO.getId())
-            .map(existingComments -> {
-                commentsMapper.partialUpdate(existingComments, commentsDTO);
-
-                return existingComments;
-            })
-            .map(commentsRepository::save)
-            .map(commentsMapper::toDto);
-    }
+    //        return commentsRepository
+    //            .findById(commentsDTO.getId())
+    //            .map(existingComments -> {
+    //                commentsMapper.partialUpdate(existingComments, commentsDTO);
+    //
+    //                return existingComments;
+    //            })
+    //            .map(commentsRepository::save)
+    //            .map(commentsMapper::toDto);
+    //    }
 
     /**
      * Get all the comments.
      *
      * @return the list of entities.
      */
-    @Transactional(readOnly = true)
-    public List<CommentsDTO> findAll() {
-        log.debug("Request to get all Comments");
-        return commentsRepository.findAll().stream().map(commentsMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
-    }
+    //    @Transactional(readOnly = true)
+    //    public List<CommentsDTO> findAll() {
+    //        log.debug("Request to get all Comments");
+    //        return commentsRepository.findAll().stream().map(commentsMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    //    }
 
     /**
      * Get one comments by id.
@@ -94,11 +94,11 @@ public class CommentsService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    @Transactional(readOnly = true)
-    public Optional<CommentsDTO> findOne(Long id) {
-        log.debug("Request to get Comments : {}", id);
-        return commentsRepository.findById(id).map(commentsMapper::toDto);
-    }
+    //    @Transactional(readOnly = true)
+    //    public Optional<CommentsDTO> findOne(Long id) {
+    //        log.debug("Request to get Comments : {}", id);
+    //        return commentsRepository.findById(id).map(commentsMapper::toDto);
+    //    }
 
     /**
      * Delete the comments by id.

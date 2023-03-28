@@ -107,30 +107,30 @@ public class GalleriesResource {
      * or with status {@code 500 (Internal Server Error)} if the galleriesDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/galleries/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<GalleriesDTO> partialUpdateGalleries(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody GalleriesDTO galleriesDTO
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update Galleries partially : {}, {}", id, galleriesDTO);
-        if (galleriesDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, galleriesDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!galleriesRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<GalleriesDTO> result = galleriesService.partialUpdate(galleriesDTO);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, galleriesDTO.getId().toString())
-        );
-    }
+    //    @PatchMapping(value = "/galleries/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    //    public ResponseEntity<GalleriesDTO> partialUpdateGalleries(
+    //        @PathVariable(value = "id", required = false) final Long id,
+    //        @NotNull @RequestBody GalleriesDTO galleriesDTO
+    //    ) throws URISyntaxException {
+    //        log.debug("REST request to partial update Galleries partially : {}, {}", id, galleriesDTO);
+    //        if (galleriesDTO.getId() == null) {
+    //            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+    //        }
+    //        if (!Objects.equals(id, galleriesDTO.getId())) {
+    //            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+    //        }
+    //
+    //        if (!galleriesRepository.existsById(id)) {
+    //            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+    //        }
+    //
+    //        Optional<GalleriesDTO> result = galleriesService.partialUpdate(galleriesDTO);
+    //
+    //        return ResponseUtil.wrapOrNotFound(
+    //            result,
+    //            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, galleriesDTO.getId().toString())
+    //        );
+    //    }
 
     /**
      * {@code GET  /galleries} : get all the galleries.
@@ -138,11 +138,11 @@ public class GalleriesResource {
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of galleries in body.
      */
-    @GetMapping("/galleries")
-    public List<GalleriesDTO> getAllGalleries(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
-        log.debug("REST request to get all Galleries");
-        return galleriesService.findAll();
-    }
+    //    @GetMapping("/galleries")
+    //    public List<GalleriesDTO> getAllGalleries(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    //        log.debug("REST request to get all Galleries");
+    //        return galleriesService.findAll();
+    //    }
 
     /**
      * {@code GET  /galleries/:id} : get the "id" galleries.
@@ -150,12 +150,12 @@ public class GalleriesResource {
      * @param id the id of the galleriesDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the galleriesDTO, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/galleries/{id}")
-    public ResponseEntity<GalleriesDTO> getGalleries(@PathVariable Long id) {
-        log.debug("REST request to get Galleries : {}", id);
-        Optional<GalleriesDTO> galleriesDTO = galleriesService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(galleriesDTO);
-    }
+    //    @GetMapping("/galleries/{id}")
+    //    public ResponseEntity<GalleriesDTO> getGalleries(@PathVariable Long id) {
+    //        log.debug("REST request to get Galleries : {}", id);
+    //        Optional<GalleriesDTO> galleriesDTO = galleriesService.findOne(id);
+    //        return ResponseUtil.wrapOrNotFound(galleriesDTO);
+    //    }
 
     /**
      * {@code DELETE  /galleries/:id} : delete the "id" galleries.

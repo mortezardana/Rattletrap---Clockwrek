@@ -1,8 +1,10 @@
 package com.yellowmorty.steamball.service.dto;
 
+import com.yellowmorty.steamball.domain.Wallets;
 import com.yellowmorty.steamball.domain.enumeration.UserType;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 import javax.validation.constraints.*;
 
 /**
@@ -19,9 +21,9 @@ public class UsersDTO implements Serializable {
     @Pattern(regexp = "^[A-Z][a-z]+\\d$")
     private String userName;
 
-    private String wallets;
+    private Set<WalletsDTO> wallets;
 
-    private String galleries;
+    private Set<GalleriesDTO> galleries;
 
     @NotNull
     private String password;
@@ -44,19 +46,19 @@ public class UsersDTO implements Serializable {
         this.userName = userName;
     }
 
-    public String getWallets() {
+    public Set<WalletsDTO> getWallets() {
         return wallets;
     }
 
-    public void setWallets(String wallets) {
+    public void setWallets(Set<WalletsDTO> wallets) {
         this.wallets = wallets;
     }
 
-    public String getGalleries() {
+    public Set<GalleriesDTO> getGalleries() {
         return galleries;
     }
 
-    public void setGalleries(String galleries) {
+    public void setGalleries(Set<GalleriesDTO> galleries) {
         this.galleries = galleries;
     }
 

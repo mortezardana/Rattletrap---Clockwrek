@@ -25,10 +25,6 @@ public class Wallets implements Serializable {
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @NotNull
-    @Column(name = "user_id", nullable = false, unique = true)
-    private Long userId;
-
     @Column(name = "wallet_address")
     private String walletAddress;
 
@@ -53,19 +49,6 @@ public class Wallets implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getUserId() {
-        return this.userId;
-    }
-
-    public Wallets userId(Long userId) {
-        this.setUserId(userId);
-        return this;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getWalletAddress() {
@@ -100,11 +83,6 @@ public class Wallets implements Serializable {
 
     public void setUserId(Users users) {
         this.userId = users;
-    }
-
-    public Wallets userId(Users users) {
-        this.setUserId(users);
-        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

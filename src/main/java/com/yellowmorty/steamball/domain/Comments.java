@@ -33,7 +33,7 @@ public class Comments implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = { "comments", "nfts", "userId" }, allowSetters = true)
-    private Galleries id;
+    private Galleries galleries;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -76,16 +76,16 @@ public class Comments implements Serializable {
         this.father = father;
     }
 
-    public Galleries getId() {
-        return this.id;
+    public Galleries getGalleries() {
+        return this.galleries;
     }
 
-    public void setId(Galleries galleries) {
-        this.id = galleries;
+    public void setGalleries(Galleries galleries) {
+        this.galleries = galleries;
     }
 
-    public Comments id(Galleries galleries) {
-        this.setId(galleries);
+    public Comments galleries(Galleries galleries) {
+        this.setGalleries(galleries);
         return this;
     }
 

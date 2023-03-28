@@ -3,7 +3,6 @@ package com.yellowmorty.steamball.service;
 import com.yellowmorty.steamball.domain.Wallets;
 import com.yellowmorty.steamball.repository.WalletsRepository;
 import com.yellowmorty.steamball.service.dto.WalletsDTO;
-import com.yellowmorty.steamball.service.mapper.WalletsMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -24,11 +23,10 @@ public class WalletsService {
 
     private final WalletsRepository walletsRepository;
 
-    private final WalletsMapper walletsMapper;
+    //    private final WalletsMapper walletsMapper;
 
-    public WalletsService(WalletsRepository walletsRepository, WalletsMapper walletsMapper) {
+    public WalletsService(WalletsRepository walletsRepository) {
         this.walletsRepository = walletsRepository;
-        this.walletsMapper = walletsMapper;
     }
 
     /**
@@ -39,9 +37,10 @@ public class WalletsService {
      */
     public WalletsDTO save(WalletsDTO walletsDTO) {
         log.debug("Request to save Wallets : {}", walletsDTO);
-        Wallets wallets = walletsMapper.toEntity(walletsDTO);
-        wallets = walletsRepository.save(wallets);
-        return walletsMapper.toDto(wallets);
+        //        Wallets wallets = walletsMapper.toEntity(walletsDTO);
+        //        wallets = walletsRepository.save(wallets);
+        //        return walletsMapper.toDto(wallets);
+        return walletsDTO;
     }
 
     /**
@@ -52,9 +51,10 @@ public class WalletsService {
      */
     public WalletsDTO update(WalletsDTO walletsDTO) {
         log.debug("Request to update Wallets : {}", walletsDTO);
-        Wallets wallets = walletsMapper.toEntity(walletsDTO);
-        wallets = walletsRepository.save(wallets);
-        return walletsMapper.toDto(wallets);
+        //        Wallets wallets = walletsMapper.toEntity(walletsDTO);
+        //        wallets = walletsRepository.save(wallets);
+        //        return walletsMapper.toDto(wallets);
+        return walletsDTO;
     }
 
     /**
@@ -63,30 +63,30 @@ public class WalletsService {
      * @param walletsDTO the entity to update partially.
      * @return the persisted entity.
      */
-    public Optional<WalletsDTO> partialUpdate(WalletsDTO walletsDTO) {
-        log.debug("Request to partially update Wallets : {}", walletsDTO);
-
-        return walletsRepository
-            .findById(walletsDTO.getId())
-            .map(existingWallets -> {
-                walletsMapper.partialUpdate(existingWallets, walletsDTO);
-
-                return existingWallets;
-            })
-            .map(walletsRepository::save)
-            .map(walletsMapper::toDto);
-    }
+    //    public Optional<WalletsDTO> partialUpdate(WalletsDTO walletsDTO) {
+    //        log.debug("Request to partially update Wallets : {}", walletsDTO);
+    //
+    //        return walletsRepository
+    //            .findById(walletsDTO.getId())
+    //            .map(existingWallets -> {
+    //                walletsMapper.partialUpdate(existingWallets, walletsDTO);
+    //
+    //                return existingWallets;
+    //            })
+    //            .map(walletsRepository::save)
+    //            .map(walletsMapper::toDto);
+    //    }
 
     /**
      * Get all the wallets.
      *
      * @return the list of entities.
      */
-    @Transactional(readOnly = true)
-    public List<WalletsDTO> findAll() {
-        log.debug("Request to get all Wallets");
-        return walletsRepository.findAll().stream().map(walletsMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
-    }
+    //    @Transactional(readOnly = true)
+    //    public List<WalletsDTO> findAll() {
+    //        log.debug("Request to get all Wallets");
+    //        return walletsRepository.findAll().stream().map(walletsMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    //    }
 
     /**
      * Get one wallets by id.
@@ -94,11 +94,11 @@ public class WalletsService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    @Transactional(readOnly = true)
-    public Optional<WalletsDTO> findOne(Long id) {
-        log.debug("Request to get Wallets : {}", id);
-        return walletsRepository.findById(id).map(walletsMapper::toDto);
-    }
+    //    @Transactional(readOnly = true)
+    //    public Optional<WalletsDTO> findOne(Long id) {
+    //        log.debug("Request to get Wallets : {}", id);
+    //        return walletsRepository.findById(id).map(walletsMapper::toDto);
+    //    }
 
     /**
      * Delete the wallets by id.

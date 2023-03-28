@@ -19,7 +19,6 @@ type GalleriesFormDefaults = Pick<NewGalleries, 'id' | 'nfts'>;
 type GalleriesFormGroupContent = {
   id: FormControl<IGalleries['id'] | NewGalleries['id']>;
   creator: FormControl<IGalleries['creator']>;
-  nfts: FormControl<IGalleries['nfts']>;
   likes: FormControl<IGalleries['likes']>;
   comments: FormControl<IGalleries['comments']>;
   nfts: FormControl<IGalleries['nfts']>;
@@ -46,7 +45,6 @@ export class GalleriesFormService {
       creator: new FormControl(galleriesRawValue.creator, {
         validators: [Validators.required],
       }),
-      nfts: new FormControl(galleriesRawValue.nfts),
       likes: new FormControl(galleriesRawValue.likes),
       comments: new FormControl(galleriesRawValue.comments),
       nfts: new FormControl(galleriesRawValue.nfts ?? []),

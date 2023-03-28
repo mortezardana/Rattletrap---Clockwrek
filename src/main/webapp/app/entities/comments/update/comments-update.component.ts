@@ -81,7 +81,7 @@ export class CommentsUpdateComponent implements OnInit {
 
     this.galleriesSharedCollection = this.galleriesService.addGalleriesToCollectionIfMissing<IGalleries>(
       this.galleriesSharedCollection,
-      comments.id
+      comments.galleryId
     );
   }
 
@@ -90,7 +90,9 @@ export class CommentsUpdateComponent implements OnInit {
       .query()
       .pipe(map((res: HttpResponse<IGalleries[]>) => res.body ?? []))
       .pipe(
-        map((galleries: IGalleries[]) => this.galleriesService.addGalleriesToCollectionIfMissing<IGalleries>(galleries, this.comments?.id))
+        map((galleries: IGalleries[]) =>
+          this.galleriesService.addGalleriesToCollectionIfMissing<IGalleries>(galleries, this.comments?.galleryId)
+        )
       )
       .subscribe((galleries: IGalleries[]) => (this.galleriesSharedCollection = galleries));
   }

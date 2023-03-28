@@ -4,7 +4,6 @@ import { IUsers } from 'app/entities/users/users.model';
 export interface IGalleries {
   id: number;
   creator?: number | null;
-  nfts?: string | null;
   likes?: string | null;
   comments?: string | null;
   nfts?: Pick<INfts, 'id'>[] | null;

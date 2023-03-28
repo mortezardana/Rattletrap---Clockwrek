@@ -18,7 +18,7 @@ public class CommentsDTO implements Serializable {
 
     private Long father;
 
-    private GalleriesDTO id;
+    private GalleriesDTO galleries;
 
     public Long getId() {
         return id;
@@ -44,12 +44,12 @@ public class CommentsDTO implements Serializable {
         this.father = father;
     }
 
-    public GalleriesDTO getId() {
-        return id;
+    public GalleriesDTO getGalleries() {
+        return galleries;
     }
 
-    public void setId(GalleriesDTO id) {
-        this.id = id;
+    public void setGalleries(GalleriesDTO galleries) {
+        this.galleries = galleries;
     }
 
     @Override

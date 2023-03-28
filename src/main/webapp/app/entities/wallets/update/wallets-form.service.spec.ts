@@ -20,7 +20,6 @@ describe('Wallets Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            userId: expect.any(Object),
             walletAddress: expect.any(Object),
             walletType: expect.any(Object),
             userId: expect.any(Object),
@@ -34,7 +33,6 @@ describe('Wallets Form Service', () => {
         expect(formGroup.controls).toEqual(
           expect.objectContaining({
             id: expect.any(Object),
-            userId: expect.any(Object),
             walletAddress: expect.any(Object),
             walletType: expect.any(Object),
             userId: expect.any(Object),

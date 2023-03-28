@@ -107,41 +107,41 @@ public class CommentsResource {
      * or with status {@code 500 (Internal Server Error)} if the commentsDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/comments/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<CommentsDTO> partialUpdateComments(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody CommentsDTO commentsDTO
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update Comments partially : {}, {}", id, commentsDTO);
-        if (commentsDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, commentsDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!commentsRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<CommentsDTO> result = commentsService.partialUpdate(commentsDTO);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, commentsDTO.getId().toString())
-        );
-    }
+    //    @PatchMapping(value = "/comments/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    //    public ResponseEntity<CommentsDTO> partialUpdateComments(
+    //        @PathVariable(value = "id", required = false) final Long id,
+    //        @NotNull @RequestBody CommentsDTO commentsDTO
+    //    ) throws URISyntaxException {
+    //        log.debug("REST request to partial update Comments partially : {}, {}", id, commentsDTO);
+    //        if (commentsDTO.getId() == null) {
+    //            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+    //        }
+    //        if (!Objects.equals(id, commentsDTO.getId())) {
+    //            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+    //        }
+    //
+    //        if (!commentsRepository.existsById(id)) {
+    //            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+    //        }
+    //
+    //        Optional<CommentsDTO> result = commentsService.partialUpdate(commentsDTO);
+    //
+    //        return ResponseUtil.wrapOrNotFound(
+    //            result,
+    //            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, commentsDTO.getId().toString())
+    //        );
+    //    }
 
     /**
      * {@code GET  /comments} : get all the comments.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of comments in body.
      */
-    @GetMapping("/comments")
-    public List<CommentsDTO> getAllComments() {
-        log.debug("REST request to get all Comments");
-        return commentsService.findAll();
-    }
+    //    @GetMapping("/comments")
+    //    public List<CommentsDTO> getAllComments() {
+    //        log.debug("REST request to get all Comments");
+    //        return commentsService.findAll();
+    //    }
 
     /**
      * {@code GET  /comments/:id} : get the "id" comments.
@@ -149,12 +149,12 @@ public class CommentsResource {
      * @param id the id of the commentsDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the commentsDTO, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/comments/{id}")
-    public ResponseEntity<CommentsDTO> getComments(@PathVariable Long id) {
-        log.debug("REST request to get Comments : {}", id);
-        Optional<CommentsDTO> commentsDTO = commentsService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(commentsDTO);
-    }
+    //    @GetMapping("/comments/{id}")
+    //    public ResponseEntity<CommentsDTO> getComments(@PathVariable Long id) {
+    //        log.debug("REST request to get Comments : {}", id);
+    //        Optional<CommentsDTO> commentsDTO = commentsService.findOne(id);
+    //        return ResponseUtil.wrapOrNotFound(commentsDTO);
+    //    }
 
     /**
      * {@code DELETE  /comments/:id} : delete the "id" comments.

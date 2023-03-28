@@ -18,7 +18,6 @@ type WalletsFormDefaults = Pick<NewWallets, 'id'>;
 
 type WalletsFormGroupContent = {
   id: FormControl<IWallets['id'] | NewWallets['id']>;
-  userId: FormControl<IWallets['userId']>;
   walletAddress: FormControl<IWallets['walletAddress']>;
   walletType: FormControl<IWallets['walletType']>;
   userId: FormControl<IWallets['userId']>;
@@ -41,9 +40,6 @@ export class WalletsFormService {
           validators: [Validators.required],
         }
       ),
-      userId: new FormControl(walletsRawValue.userId, {
-        validators: [Validators.required],
-      }),
       walletAddress: new FormControl(walletsRawValue.walletAddress),
       walletType: new FormControl(walletsRawValue.walletType),
       userId: new FormControl(walletsRawValue.userId),

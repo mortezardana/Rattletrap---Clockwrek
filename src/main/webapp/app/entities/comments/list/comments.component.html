@@ -68,7 +68,7 @@
           <td>{{ comments.father }}</td>
           <td>
             <div *ngIf="comments.id">
-              <a [routerLink]="['/galleries', comments.id.id, 'view']">{{ comments.id.id }}</a>
+              <a [routerLink]="['/galleries', comments.galleryId, 'view']">{{ comments.galleryId }}</a>
             </div>
           </td>
           <td class="text-end">

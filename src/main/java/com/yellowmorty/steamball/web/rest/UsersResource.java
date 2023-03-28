@@ -23,7 +23,7 @@ import tech.jhipster.web.util.ResponseUtil;
  * REST controller for managing {@link com.yellowmorty.steamball.domain.Users}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/selfUsers")
 public class UsersResource {
 
     private final Logger log = LoggerFactory.getLogger(UsersResource.class);

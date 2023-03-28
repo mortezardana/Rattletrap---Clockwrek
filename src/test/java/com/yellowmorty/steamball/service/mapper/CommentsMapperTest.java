@@ -6,11 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CommentsMapperTest {
-
-    private CommentsMapper commentsMapper;
-
-    @BeforeEach
-    public void setUp() {
-        commentsMapper = new CommentsMapperImpl();
-    }
+    //    private CommentsMapper commentsMapper;
+    //
+    //    @BeforeEach
+    //    public void setUp() {
+    //        commentsMapper = new CommentsMapperImpl();
+    //    }
 }

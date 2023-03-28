@@ -107,41 +107,41 @@ public class WalletsResource {
      * or with status {@code 500 (Internal Server Error)} if the walletsDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/wallets/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public ResponseEntity<WalletsDTO> partialUpdateWallets(
-        @PathVariable(value = "id", required = false) final Long id,
-        @NotNull @RequestBody WalletsDTO walletsDTO
-    ) throws URISyntaxException {
-        log.debug("REST request to partial update Wallets partially : {}, {}", id, walletsDTO);
-        if (walletsDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        if (!Objects.equals(id, walletsDTO.getId())) {
-            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
-        }
-
-        if (!walletsRepository.existsById(id)) {
-            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
-        }
-
-        Optional<WalletsDTO> result = walletsService.partialUpdate(walletsDTO);
-
-        return ResponseUtil.wrapOrNotFound(
-            result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, walletsDTO.getId().toString())
-        );
-    }
+    //    @PatchMapping(value = "/wallets/{id}", consumes = { "application/json", "application/merge-patch+json" })
+    //    public ResponseEntity<WalletsDTO> partialUpdateWallets(
+    //        @PathVariable(value = "id", required = false) final Long id,
+    //        @NotNull @RequestBody WalletsDTO walletsDTO
+    //    ) throws URISyntaxException {
+    //        log.debug("REST request to partial update Wallets partially : {}, {}", id, walletsDTO);
+    //        if (walletsDTO.getId() == null) {
+    //            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+    //        }
+    //        if (!Objects.equals(id, walletsDTO.getId())) {
+    //            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+    //        }
+    //
+    //        if (!walletsRepository.existsById(id)) {
+    //            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+    //        }
+    //
+    //        Optional<WalletsDTO> result = walletsService.partialUpdate(walletsDTO);
+    //
+    //        return ResponseUtil.wrapOrNotFound(
+    //            result,
+    //            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, walletsDTO.getId().toString())
+    //        );
+    //    }
 
     /**
      * {@code GET  /wallets} : get all the wallets.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of wallets in body.
      */
-    @GetMapping("/wallets")
-    public List<WalletsDTO> getAllWallets() {
-        log.debug("REST request to get all Wallets");
-        return walletsService.findAll();
-    }
+    //    @GetMapping("/wallets")
+    //    public List<WalletsDTO> getAllWallets() {
+    //        log.debug("REST request to get all Wallets");
+    //        return walletsService.findAll();
+    //    }
 
     /**
      * {@code GET  /wallets/:id} : get the "id" wallets.
@@ -149,12 +149,12 @@ public class WalletsResource {
      * @param id the id of the walletsDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the walletsDTO, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/wallets/{id}")
-    public ResponseEntity<WalletsDTO> getWallets(@PathVariable Long id) {
-        log.debug("REST request to get Wallets : {}", id);
-        Optional<WalletsDTO> walletsDTO = walletsService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(walletsDTO);
-    }
+    //    @GetMapping("/wallets/{id}")
+    //    public ResponseEntity<WalletsDTO> getWallets(@PathVariable Long id) {
+    //        log.debug("REST request to get Wallets : {}", id);
+    //        Optional<WalletsDTO> walletsDTO = walletsService.findOne(id);
+    //        return ResponseUtil.wrapOrNotFound(walletsDTO);
+    //    }
 
     /**
      * {@code DELETE  /wallets/:id} : delete the "id" wallets.

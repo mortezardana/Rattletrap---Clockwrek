@@ -22,7 +22,7 @@ describe('Comments Form Service', () => {
             id: expect.any(Object),
             text: expect.any(Object),
             father: expect.any(Object),
-            id: expect.any(Object),
+            galleryId: expect.any(Object),
           })
         );
       });
@@ -35,7 +35,7 @@ describe('Comments Form Service', () => {
             id: expect.any(Object),
             text: expect.any(Object),
             father: expect.any(Object),
-            id: expect.any(Object),
+            galleryId: expect.any(Object),
           })
         );
       });

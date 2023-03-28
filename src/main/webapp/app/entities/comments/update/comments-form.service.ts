@@ -20,7 +20,7 @@ type CommentsFormGroupContent = {
   id: FormControl<IComments['id'] | NewComments['id']>;
   text: FormControl<IComments['text']>;
   father: FormControl<IComments['father']>;
-  id: FormControl<IComments['id']>;
+  galleryId: FormControl<IComments['galleryId']>;
 };
 
 export type CommentsFormGroup = FormGroup<CommentsFormGroupContent>;
@@ -44,7 +44,7 @@ export class CommentsFormService {
         validators: [Validators.required],
       }),
       father: new FormControl(commentsRawValue.father),
-      id: new FormControl(commentsRawValue.id),
+      galleryId: new FormControl(commentsRawValue.galleryId),
     });
   }
 
