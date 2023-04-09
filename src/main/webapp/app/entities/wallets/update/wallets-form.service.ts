@@ -37,7 +37,6 @@ export class WalletsFormService {
         { value: walletsRawValue.id, disabled: true },
         {
           nonNullable: true,
-          validators: [Validators.required],
         }
       ),
       walletAddress: new FormControl(walletsRawValue.walletAddress),

@@ -11,7 +11,6 @@ import javax.validation.constraints.*;
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class WalletsDTO implements Serializable {
 
-    @NotNull
     private Long id;
 
     private String walletAddress;

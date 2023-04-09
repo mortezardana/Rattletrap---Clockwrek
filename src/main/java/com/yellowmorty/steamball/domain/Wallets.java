@@ -19,10 +19,9 @@ public class Wallets implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
+    @Column(name = "id", unique = true)
     private Long id;
 
     @Column(name = "wallet_address")

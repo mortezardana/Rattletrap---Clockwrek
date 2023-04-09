@@ -3,8 +3,12 @@ package com.yellowmorty.steamball.service;
 import com.yellowmorty.steamball.config.Constants;
 import com.yellowmorty.steamball.domain.Authority;
 import com.yellowmorty.steamball.domain.User;
+import com.yellowmorty.steamball.domain.Wallets;
+import com.yellowmorty.steamball.domain.enumeration.WalletType;
 import com.yellowmorty.steamball.repository.AuthorityRepository;
 import com.yellowmorty.steamball.repository.UserRepository;
+import com.yellowmorty.steamball.repository.UsersRepository;
+import com.yellowmorty.steamball.repository.WalletsRepository;
 import com.yellowmorty.steamball.security.AuthoritiesConstants;
 import com.yellowmorty.steamball.security.SecurityUtils;
 import com.yellowmorty.steamball.service.dto.AdminUserDTO;
@@ -35,6 +39,10 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final UsersRepository usersRepository;
+
+    private final WalletsRepository walletsRepository;
+
     private final PasswordEncoder passwordEncoder;
 
     private final AuthorityRepository authorityRepository;
@@ -45,12 +53,16 @@ public class UserService {
         UserRepository userRepository,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
-        CacheManager cacheManager
+        CacheManager cacheManager,
+        UsersRepository usersRepository,
+        WalletsRepository walletsRepository
     ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.usersRepository = usersRepository;
+        this.walletsRepository = walletsRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -91,6 +103,17 @@ public class UserService {
                 this.clearUserCaches(user);
                 return user;
             });
+    }
+
+    public String registerUserWithWallet(String publicAddress) {
+        Wallets wallet = new Wallets();
+        wallet.setWalletAddress(publicAddress + "1");
+        wallet.setWalletType(WalletType.ETHEREUM);
+        //        wallet.setUserId(1L);
+        walletsRepository.save(wallet);
+        log.debug("wallet is saved!: {}", wallet);
+        log.debug("this is the wallet fetched: {}", walletsRepository.findOneByWalletAddress(publicAddress));
+        return "complete!";
     }
 
     public User registerUser(AdminUserDTO userDTO, String password) {
