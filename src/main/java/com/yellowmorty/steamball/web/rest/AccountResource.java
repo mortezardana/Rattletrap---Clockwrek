@@ -66,6 +66,30 @@ public class AccountResource {
     }
 
     /**
+     * {@code POST  /register-wallet} : register the user.
+     *
+     * @param publicAdd the managed user View Model.
+     * @throws InvalidPasswordException {@code 400 (Bad Request)} if the password is incorrect.
+     * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is already used.
+     * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is already used.
+     */
+    @PostMapping("/register-wallet")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void registerAccountWithWallet(@Valid @RequestBody String publicAdd) {
+        //        TODO: 1. check if already exists
+        //              2. receive public address
+        //                3. save user
+        //                4. generate nonce
+        //                5. send nonce back to front
+        log.debug("__________________public address_______________________");
+        log.debug(publicAdd);
+        log.debug("___________________nounce______________________");
+        String nounce = userService.registerUserWithWallet(publicAdd);
+        log.debug(nounce);
+        log.debug("_________________________________________");
+    }
+
+    /**
      * {@code GET  /activate} : activate the registered user.
      *
      * @param key the activation key.
