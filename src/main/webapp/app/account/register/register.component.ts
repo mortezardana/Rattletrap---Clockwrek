@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/config/error.constants';
 import { RegisterService } from './register.service';
+import Web3 from 'web3';
 
 @Component({
   selector: 'jhi-register',
@@ -13,6 +14,8 @@ import { RegisterService } from './register.service';
 export class RegisterComponent implements AfterViewInit {
   @ViewChild('login', { static: false })
   login?: ElementRef;
+
+  web3: Web3;
 
   doNotMatch = false;
   error = false;
@@ -44,7 +47,9 @@ export class RegisterComponent implements AfterViewInit {
     }),
   });
 
-  constructor(private translateService: TranslateService, private registerService: RegisterService) {}
+  constructor(private translateService: TranslateService, private registerService: RegisterService) {
+    this.web3 = new Web3('HTTP://127.0.0.1:8545');
+  }
 
   ngAfterViewInit(): void {
     if (this.login) {
@@ -67,6 +72,31 @@ export class RegisterComponent implements AfterViewInit {
         .save({ login, email, password, langKey: this.translateService.currentLang })
         .subscribe({ next: () => (this.success = true), error: response => this.processError(response) });
     }
+  }
+
+  walletRegister(event: any): void {
+    let requestAccount = event.view.window.ethereum.request({ method: 'eth_requestAccounts' });
+    let publicAddress: string;
+    let nounce: string;
+
+    requestAccount
+      .then((result: any) => {
+        publicAddress = result[0];
+        console.log('Request account was successful with this result: ', publicAddress);
+        this.registerService
+          .registerWallet(publicAddress)
+          .subscribe({ next: () => (this.success = true), error: response => this.processError(response) });
+      })
+      .catch((error: any) => {
+        console.log('Request account failed due to: ', error);
+      })
+      .finally(() => {
+        console.log('Requesting account function was ended!');
+      });
+
+    console.log('______________________________________');
+    console.log(requestAccount);
+    console.log('______________________________________');
   }
 
   private processError(response: HttpErrorResponse): void {
