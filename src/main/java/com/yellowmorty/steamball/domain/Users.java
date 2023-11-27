@@ -41,12 +41,12 @@ public class Users implements Serializable {
     @Column(name = "type")
     private UserType type;
 
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "userId" }, allowSetters = true)
     private Set<Wallets> wallets = new HashSet<>();
 
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "comments", "nfts", "userId" }, allowSetters = true)
     private Set<Galleries> galleries = new HashSet<>();
@@ -117,6 +117,13 @@ public class Users implements Serializable {
             wallets.forEach(i -> i.setUserId(this));
         }
         this.wallets = wallets;
+    }
+
+    public void setWallets(Wallets wallet) {
+        if (this.wallets != null) {}
+        if (wallet != null) {
+            this.wallets.add(wallet);
+        }
     }
 
     public Users wallets(Set<Wallets> wallets) {

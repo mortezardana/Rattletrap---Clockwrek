@@ -74,7 +74,7 @@ export class RegisterComponent implements AfterViewInit {
     }
   }
 
-  walletRegister(event: any): void {
+  checkUserPublicAddy(event: any): void {
     let requestAccount = event.view.window.ethereum.request({ method: 'eth_requestAccounts' });
     let publicAddress: string;
     let nounce: string;
@@ -82,10 +82,52 @@ export class RegisterComponent implements AfterViewInit {
     requestAccount
       .then((result: any) => {
         publicAddress = result[0];
+        this.registerService
+          .checkPublicAdd(publicAddress)
+          .subscribe({ next: () => (this.success = true), error: response => this.processError(response) });
+        console.log('Request to check public address ______________________________________________________________');
+      })
+      .catch((error: any) => {
+        console.log(
+          "requesting to check if this user's wallet's public address is registered in the platform failed with response: ",
+          error
+        );
+      })
+      .finally(() => {
+        console.log('Requested to check if public address provided is registered in the platform!');
+      });
+  }
+
+  walletRegister(event: any): void {
+    let requestAccount = event.view.window.ethereum.request({ method: 'eth_requestAccounts' });
+    let requestSign = event.view.window.ethereum.request({
+      method: 'eth_sign',
+      params: ['0xb82dbad89bf7dea41ddeb2782b68f3acba6295f3', this.web3.utils.sha3('test')],
+      message: 'this message is shown in metamask',
+    });
+    let publicAddress: string;
+    let nounce: string;
+
+    requestAccount
+      .then((result: any) => {
+        publicAddress = result[0];
+        let hashNonce = requestSign;
         console.log('Request account was successful with this result: ', publicAddress);
         this.registerService
-          .registerWallet(publicAddress)
+          .registerWallet(publicAddress, hashNonce)
           .subscribe({ next: () => (this.success = true), error: response => this.processError(response) });
+      })
+      .catch((error: any) => {
+        console.log('Request account failed due to: ', error);
+      })
+      .finally(() => {
+        console.log('Requesting account function was ended!');
+      });
+
+    requestSign
+      .then((result: any) => {
+        // publicAddress = result[0];
+        console.log('Request sign was successful with this result: ', result);
       })
       .catch((error: any) => {
         console.log('Request account failed due to: ', error);

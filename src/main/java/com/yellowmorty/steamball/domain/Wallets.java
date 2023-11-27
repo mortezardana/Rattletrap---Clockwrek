@@ -31,7 +31,7 @@ public class Wallets implements Serializable {
     @Column(name = "wallet_type")
     private WalletType walletType;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = { "ids", "ids" }, allowSetters = true)
     private Users userId;
 

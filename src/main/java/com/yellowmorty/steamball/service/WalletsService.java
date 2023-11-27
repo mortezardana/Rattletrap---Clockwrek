@@ -3,6 +3,7 @@ package com.yellowmorty.steamball.service;
 import com.yellowmorty.steamball.domain.Wallets;
 import com.yellowmorty.steamball.repository.WalletsRepository;
 import com.yellowmorty.steamball.service.dto.WalletsDTO;
+import com.yellowmorty.steamball.service.mapper.WalletsMapper;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -23,10 +24,11 @@ public class WalletsService {
 
     private final WalletsRepository walletsRepository;
 
-    //    private final WalletsMapper walletsMapper;
+    private final WalletsMapper walletsMapper;
 
-    public WalletsService(WalletsRepository walletsRepository) {
+    public WalletsService(WalletsRepository walletsRepository, WalletsMapper walletsMapper) {
         this.walletsRepository = walletsRepository;
+        this.walletsMapper = walletsMapper;
     }
 
     /**
@@ -55,6 +57,11 @@ public class WalletsService {
         //        wallets = walletsRepository.save(wallets);
         //        return walletsMapper.toDto(wallets);
         return walletsDTO;
+    }
+
+    public Optional<Wallets> findOneByPublicAddress(String publicAddy) {
+        log.debug("trying to find a wallet entity with a given public address: {}", publicAddy);
+        return walletsRepository.findOneByWalletAddress(publicAddy).map(walletsMapper::toEntity);
     }
 
     /**

@@ -3,7 +3,9 @@ package com.yellowmorty.steamball.service;
 import com.yellowmorty.steamball.config.Constants;
 import com.yellowmorty.steamball.domain.Authority;
 import com.yellowmorty.steamball.domain.User;
+import com.yellowmorty.steamball.domain.Users;
 import com.yellowmorty.steamball.domain.Wallets;
+import com.yellowmorty.steamball.domain.enumeration.UserType;
 import com.yellowmorty.steamball.domain.enumeration.WalletType;
 import com.yellowmorty.steamball.repository.AuthorityRepository;
 import com.yellowmorty.steamball.repository.UserRepository;
@@ -13,6 +15,8 @@ import com.yellowmorty.steamball.security.AuthoritiesConstants;
 import com.yellowmorty.steamball.security.SecurityUtils;
 import com.yellowmorty.steamball.service.dto.AdminUserDTO;
 import com.yellowmorty.steamball.service.dto.UserDTO;
+import com.yellowmorty.steamball.service.dto.WalletsDTO;
+import com.yellowmorty.steamball.service.mapper.WalletsMapper;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -49,13 +53,19 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
+    private final Web3jService web3jService;
+
+    private final WalletsMapper walletsMapper;
+
     public UserService(
         UserRepository userRepository,
         PasswordEncoder passwordEncoder,
         AuthorityRepository authorityRepository,
         CacheManager cacheManager,
         UsersRepository usersRepository,
-        WalletsRepository walletsRepository
+        WalletsRepository walletsRepository,
+        Web3jService web3jService,
+        WalletsMapper walletsMapper
     ) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -63,6 +73,8 @@ public class UserService {
         this.cacheManager = cacheManager;
         this.usersRepository = usersRepository;
         this.walletsRepository = walletsRepository;
+        this.web3jService = web3jService;
+        this.walletsMapper = walletsMapper;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -105,14 +117,37 @@ public class UserService {
             });
     }
 
+    public void registerUserManually(String publicAddress, String hashedNounce) {
+        web3jService.testWalletConnect(publicAddress, hashedNounce);
+    }
+
     public String registerUserWithWallet(String publicAddress) {
         Wallets wallet = new Wallets();
-        wallet.setWalletAddress(publicAddress + "1");
+        wallet.setWalletAddress(publicAddress);
         wallet.setWalletType(WalletType.ETHEREUM);
-        //        wallet.setUserId(1L);
-        walletsRepository.save(wallet);
-        log.debug("wallet is saved!: {}", wallet);
-        log.debug("this is the wallet fetched: {}", walletsRepository.findOneByWalletAddress(publicAddress));
+        wallet.setUserId(usersRepository.findById(1L).get());
+        //        WalletsDTO walletsDTO = walletsMapper.toDTO(wallet);
+        Wallets createdWallet;
+        Users users;
+        log.debug("\n\n\n_______________________________\n");
+        //        log.debug("users object is: {}", usersRepository.findUsersByWallets(wallet).get());
+        log.debug("\n_______________________________\n\n\n");
+        //        if (usersRepository.findUsersByWallets(wallet).isPresent()) {
+        //            users = usersRepository.findUsersByWallets(wallet).get();
+        //            log.debug("user fetched: {}", users);
+        //            return "wallet already exists";
+
+        //        } else {
+        //            createdWallet = walletsRepository.save(wallet);
+        //            users = usersRepository.findUsersByWallets(createdWallet).get();
+        //            log.debug("the wallet saving and user fetch is done and the users object is: {}", users);
+        //        }
+        //                wallet.setUserId(1L);
+        //        createdWallet = walletsRepository.save(wallet);
+        //        users = usersRepository.findUsersByWallets(createdWallet).get();
+        //        log.debug("the wallet saving and user fetch is done and the users object is: {}", users);
+        //        log.debug("wallet is saved!: {}", wallet);
+        //        log.debug("this is the wallet fetched: {}", walletsRepository.findOneByWalletAddress(publicAddress));
         return "complete!";
     }
 

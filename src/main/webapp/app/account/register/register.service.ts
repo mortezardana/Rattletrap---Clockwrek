@@ -13,7 +13,14 @@ export class RegisterService {
     return this.http.post(this.applicationConfigService.getEndpointFor('api/register'), registration);
   }
 
-  registerWallet(nounce: string): Observable<{}> {
-    return this.http.post(this.applicationConfigService.getEndpointFor('api/register-wallet'), nounce);
+  registerWallet(publicAddress: string, hashNounce: string): Observable<{}> {
+    return this.http.post(this.applicationConfigService.getEndpointFor('api/register-wallet'), {
+      publicAdd: publicAddress,
+      hashNounce: hashNounce,
+    });
+  }
+
+  checkPublicAdd(publicAddress: string): Observable<{}> {
+    return this.http.post(this.applicationConfigService.getEndpointFor('api/check-public-address'), { publicAdd: publicAddress });
   }
 }

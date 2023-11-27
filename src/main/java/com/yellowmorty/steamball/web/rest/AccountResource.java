@@ -5,6 +5,7 @@ import com.yellowmorty.steamball.repository.UserRepository;
 import com.yellowmorty.steamball.security.SecurityUtils;
 import com.yellowmorty.steamball.service.MailService;
 import com.yellowmorty.steamball.service.UserService;
+import com.yellowmorty.steamball.service.WalletsService;
 import com.yellowmorty.steamball.service.dto.AdminUserDTO;
 import com.yellowmorty.steamball.service.dto.PasswordChangeDTO;
 import com.yellowmorty.steamball.web.rest.errors.*;
@@ -41,10 +42,13 @@ public class AccountResource {
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    private final WalletsService walletsService;
+
+    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService, WalletsService walletsService) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.walletsService = walletsService;
     }
 
     /**
@@ -75,7 +79,7 @@ public class AccountResource {
      */
     @PostMapping("/register-wallet")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccountWithWallet(@Valid @RequestBody String publicAdd) {
+    public void registerAccountWithWallet(@Valid @RequestBody String publicAdd, String hashNounce) {
         //        TODO: 1. check if already exists
         //              2. receive public address
         //                3. save user
@@ -83,9 +87,29 @@ public class AccountResource {
         //                5. send nonce back to front
         log.debug("__________________public address_______________________");
         log.debug(publicAdd);
+        log.debug("sending public address to web3j service\n");
+        userService.registerUserManually(publicAdd, hashNounce);
         log.debug("___________________nounce______________________");
         String nounce = userService.registerUserWithWallet(publicAdd);
         log.debug(nounce);
+        log.debug("_________________________________________");
+    }
+
+    /**
+     * {@code POST  /check-public-address} : register the user.
+     *
+     * @param publicAdd the managed user View Model.
+     * @throws InvalidPasswordException {@code 400 (Bad Request)} if the password is incorrect.
+     * @throws EmailAlreadyUsedException {@code 400 (Bad Request)} if the email is already used.
+     * @throws LoginAlreadyUsedException {@code 400 (Bad Request)} if the login is already used.
+     */
+    @PostMapping("/check-public-address")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void checkRegister(@Valid @RequestBody String publicAdd) {
+        log.debug("__________________public address_______________________");
+        log.debug(publicAdd);
+        log.debug("sending public address to web3j service\n");
+        walletsService.findOneByPublicAddress(publicAdd);
         log.debug("_________________________________________");
     }
 
